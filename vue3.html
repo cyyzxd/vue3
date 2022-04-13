@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let person = {
+        name: "张三",
+        age: 18,
+      };
+      //#region
+      // let p = {};
+      // Object.defineProperty(p, "name", {
+      //   get() {
+      //     // 有人读取name的时候
+      //     return person.name;
+      //   },
+      //   set(value) {
+      //     console.log(11111);
+      //     person.name = value;
+      //   },
+      // });
+
+      // Object.defineProperty(p, "age", {
+      //   get() {
+      //     // 有人读取name的时候
+      //     return person.age;
+      //   },
+      //   set(value) {
+      //     console.log(2222);
+      //     person.age = value;
+      //   },
+      // });
+      //#endregion
+
+      const p = new Proxy(person, {
+        get(Obj, key) {
+          //读取 p 属性
+          return Obj[key];
+          console.log(111);
+        },
+        set(obj, key, value) {
+          //修改或者追加属性时
+          console.log(222);
+          obj[key] = value;
+        },
+        deleteProperty(obj, key) {
+          //删除属性时候
+          console.log(3333);
+          return delete obj[key];
+        },
+      });
+    </script>
+  </body>
+</html>
